@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shapes</title>
+</head>
+<body>
+	<!--Stephanie Hart L. Bonganciso -->
+	<form>
+		<h1>Shapes Factory</h1>
+		<h4 id="displayArray"></h4>
+
+		<h4>Shapes available for production</h4>
+		<h4>1 - Circle</h4>
+		<h4>2 - Square</h4>
+		<h4>3 - Triangle</h4>
+		<p >Input shape number to create: <input type="text" id="inputValue" name="Input value"/> <input type="button" value="Create" onclick="createShape()"/></p>
+		
+
+		<p id="displayOutput"></p>
+	</form>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<p>Created by: Stephanie Hart L. Bonganciso from BSIT 4-B</p>
+	<script>
+		function Circle()
+		{
+			this.shape = "Circle";
+		}
+
+		function Square()
+		{
+			this.shape = "Square";
+		}
+
+		function Triangle()
+		{
+			this.shape = "Triangle";
+		}
+
+		function shapeFactory()
+		{
+			this.create = (type) =>{
+				switch(type)
+				{
+					case '1':
+					return new Circle()
+					break;
+					case '2':
+					return new Square()
+					break;
+					case '3':
+					return new Triangle()
+					break;
+				}
+
+			}
+		}
+
+		const shapefctry = new shapeFactory();
+		const shapes = [];
+
+
+		//when button is clicked
+		function createShape()
+		{
+			//get the value on what shape to create
+			var value = document.getElementById("inputValue").value;
+			if(value > 0 && value < 4) //check the value if valid
+			{
+				shapes.push(shapefctry.create(value)); //add the shape
+				display(); //display that the shape has been created
+				displayArray(); //display the whole array
+				
+			}
+			else
+			{
+				alert("Invalid input");
+			}
+
+			document.getElementById("inputValue").value = "";
+
+		}
+
+		function say()
+		{
+			//display the shape that has been created
+			document.getElementById("displayOutput").innerHTML = "The shape " + this.shape + " has been created!";
+			
+		}
+
+		function display()
+		{
+			shapes.forEach( shp =>{
+				say.call(shp);
+			})
+		}
+
+		function displayArray() {
+	    var displayText = "Shapes created: ";
+	    
+	    shapes.forEach(shp => {
+	        displayText += shp.shape + ", ";
+	    });
+
+	    // Remove the trailing comma and space
+	    displayText = displayText.slice(0, -2);
+
+	    document.getElementById("displayArray").innerHTML = displayText;
+	}
+
+		
+
+
+	</script>
+
+
+
+</body>
+</html>
